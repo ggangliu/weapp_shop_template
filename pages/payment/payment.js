@@ -97,9 +97,37 @@ Page({
     }, function (d) {
       console.log(d)
       var dt = d.data;
+
+      //debug
+      
+      if (payment == "微信支付") {
+        console.log("支付方式" + payment)
+        wx.requestPayment(
+          {
+            'timeStamp': '',
+            'nonceStr': '',
+            'package': '',
+            'signType': 'MD5',
+            'paySign': '',
+            'success': function (res) { },
+            'fail': function (res) { console.log(res)},
+            'complete': function (res) { }
+          })
+      }
+
       if (dt.Status == "ok") {
         if (payment == "微信支付") {
-
+          wx.requestPayment(
+            {
+              'timeStamp': '',
+              'nonceStr': '',
+              'package': '',
+              'signType': 'MD5',
+              'paySign': '',
+              'success': function (res) { },
+              'fail': function (res) { },
+              'complete': function (res) { }
+            }) 
         }
         else {
           wx.redirectTo({
@@ -112,7 +140,8 @@ Page({
          wx.showModal({
         showCancel: false,
         title: '',
-        content: dt.Msg
+        //content: dt.Msg
+        content: "支付失败"
       })
       }
     })
